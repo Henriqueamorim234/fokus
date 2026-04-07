@@ -24,7 +24,7 @@ inputMusica.addEventListener('change', ()=>{
 })
 
 focoBtn.addEventListener('click', () => {
-    tempoDecorrido = 1500;
+    tempoDecorrido = 3;
     alterarContexto('foco');
     focoBtn.classList.add('active');
 })
@@ -69,6 +69,11 @@ const contagemRegressiva = () => {
     if (tempoDecorrido <= 0){
         musicaFinalizado.play()
         alert('Tempo finalizado!')
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco';
+        if (focoAtivo){
+            const evento = new CustomEvent('focoFinalizado');
+            document.dispatchEvent(evento)
+        }
         zerar() 
         return
     }
